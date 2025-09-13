@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 20:38:08 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/09/11 13:58:33 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/09/12 14:37:18 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,21 @@ int	init_shared_config(t_shared_config *shared_config)
 	return (1);
 }
 
-t_fork	*init_forks(int count)
+pthread_mutex_t	*init_forks(int count)
 {
-	t_fork	*forks;
-	int		i;
+	pthread_mutex_t	*forks;
+	int				i;
 
-	forks = malloc(sizeof(t_fork) * count);
+	forks = malloc(sizeof(pthread_mutex_t) * count);
 	if (!forks)
 		return (NULL);
 	i = 0;
 	while (i < count)
 	{
-		if (pthread_mutex_init(&forks[i].fork_mutex, NULL) != 0)
+		if (pthread_mutex_init(&forks[i], NULL) != 0)
 		{
 			while (--i >= 0)
-				pthread_mutex_destroy(&forks[i].fork_mutex);
+				pthread_mutex_destroy(&forks[i]);
 			free(forks);
 			return (NULL);
 		}
@@ -49,7 +49,7 @@ t_fork	*init_forks(int count)
 	return (forks);
 }
 
-t_philosopher	*init_philosophers(t_philo_config config, t_fork *forks,
+t_philosopher	*init_philosophers(t_philo_config config, pthread_mutex_t *forks,
 										t_shared_config *shared_config)
 {
 	t_philosopher	*philos;

@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:06:55 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/09/11 10:55:58 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/09/12 14:37:58 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 
 t_philo_config	init_config(int argc, char *argv[]);
 int				init_shared_config(t_shared_config *shared_config);
-t_fork			*init_forks(int count);
-t_philosopher	*init_philosophers(t_philo_config config, t_fork *forks,
+pthread_mutex_t	*init_forks(int count);
+t_philosopher	*init_philosophers(t_philo_config config, pthread_mutex_t *forks,
 					t_shared_config *shared_config);
 int				init_simulation(t_philo_config config, t_philo_data *data);
 
-t_philosopher	create_philosopher(int id, t_fork *forks,
+t_philosopher	create_philosopher(int id, pthread_mutex_t *forks,
 					t_philo_config config, t_shared_config *shared_config);
 
 int				run(t_philo_config config);

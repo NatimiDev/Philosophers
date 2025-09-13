@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 20:37:13 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/09/10 21:58:42 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/09/11 23:37:09 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	precise_sleep(t_philosopher *philo, int target_duration)
 	long	start_time;
 
 	start_time = get_curr_time_in_ms();
-	if (target_duration < 0)
+	if (target_duration <= 0)
 		return (1);
 	while (get_time_since_start(start_time) < target_duration)
 	{

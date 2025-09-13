@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 20:47:29 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/09/11 14:01:42 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/09/12 11:37:03 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	safe_printf(t_shared_config *config, long start_time, int id,
 			const char *msg)
 {
 	pthread_mutex_lock(&config->m_print);
-	if (!config->should_end_simulation)
+	if (!simulation_has_ended(config))
 		printf("%li %d %s\n", get_time_since_start(start_time), id, msg);
 	pthread_mutex_unlock(&config->m_print);
 }
@@ -47,13 +47,6 @@ bool	get_status(t_philosopher *philo)
 	pthread_mutex_unlock(&philo->m_status);
 	return (is_full);
 }
-
-// void	set_status(t_philosopher *philo)
-// {
-// 	pthread_mutex_lock(&philo->m_meal_time);
-// 	philo->is_full = true;
-// 	pthread_mutex_unlock(&philo->m_meal_time);
-// }
 
 bool	check_and_increment_meals(t_philosopher *philo)
 {

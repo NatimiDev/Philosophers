@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 21:37:01 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/09/11 10:12:01 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/09/12 14:45:44 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	*philosopher_one(void *arg)
 	set_last_meal_time(philo);
 	safe_printf(philo->shared_config, philo->config.start_time,
 		philo->id, "is thinking");
-	pthread_mutex_lock(&philo->first_fork->fork_mutex);
+	pthread_mutex_lock(&philo->first_fork);
 	safe_printf(philo->shared_config, philo->config.start_time, philo->id,
 		"has taken a fork");
 	precise_sleep(philo, philo->config.time_to_die * 1000);
-	pthread_mutex_unlock(&philo->first_fork->fork_mutex);
+	pthread_mutex_unlock(&philo->first_fork);
 	return (NULL);
 }
 
@@ -54,8 +54,8 @@ void	*philosopher(void *arg)
 			break ;
 		if (!thinking_cycle(philo))
 			break ;
-		if (philo->config.philosopher_count % 2)
-			precise_sleep(philo, 1);
+		// if (philo->config.philosopher_count % 2)
+		// 	precise_sleep(philo, 1);
 	}
 	return (NULL);
 }
