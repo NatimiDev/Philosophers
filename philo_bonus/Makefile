@@ -6,7 +6,7 @@
 #    By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/19 20:34:46 by nmikuka           #+#    #+#              #
-#    Updated: 2025/09/11 23:17:37 by nmikuka          ###   ########.fr        #
+#    Updated: 2025/09/13 12:17:03 by nmikuka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,11 @@
 OBJ_DIR := obj
 
 # Compiler and flags
-CC := cc
+CC := @cc
 CFLAGS := -Wall -Wextra -Werror
 
 # Library name
-NAME := philo
+NAME := philo_bonus
 
 # Source and object files
 SRC_FILES := main.c run.c philos_logic.c actions.c semaphores.c \
@@ -29,17 +29,17 @@ all: $(NAME)
 
 $(NAME): $(OBJ_FILES)
 	$(CC) $(CFLAGS) $(OBJ_FILES) -o $@  -lpthread
-	@echo "\nPhilosophers are ready to die!"
+	@echo "Philosophers are ready to die!"
 
 $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ_FILES)
+	@rm -f $(OBJ_FILES)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 
