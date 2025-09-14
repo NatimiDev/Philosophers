@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:06:55 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/09/12 23:15:37 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/09/14 23:25:56 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # include <sys/time.h>
 # include <sys/wait.h>
 # include <signal.h>
+# include <pthread.h>
 # include <fcntl.h>
 
 t_philo_config	init_config(int argc, char *argv[]);
-int				init_simulation(t_philo_config config, t_philo_data *data);
 
 int				init_semaphores(t_semaphores *sems, int philosopher_count);
 void			cleanup_semaphores(t_semaphores *sems);
@@ -41,18 +41,16 @@ void			eat(t_philosopher *philo, t_philo_config config,
 void			sleep_and_think(t_philosopher philo, t_philo_config config,
 					sem_t *sem_death);
 
-void			cleanup_simulation(t_philo_data *data, int count);
-
 // helper functions
 bool			ft_isnumeric(char *str);
 int				ft_atoi(const char *str);
 void			ft_perror(char *s);
-
+void			get_sem_name(char *dest, int id);
 long			get_curr_time_in_ms(void);
 long			get_time_since_start(long start_time);
-int				precise_sleep(t_philosopher philo, int target_duration,
-					sem_t *sem_death);
+int				precise_sleep(int target_duration);
 
 void			log_status(t_philosopher philo, const char *message,
 					sem_t *sem_death);
+
 #endif

@@ -6,7 +6,7 @@
 #    By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/19 20:34:46 by nmikuka           #+#    #+#              #
-#    Updated: 2025/09/13 12:17:03 by nmikuka          ###   ########.fr        #
+#    Updated: 2025/09/13 19:58:56 by nmikuka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CC := @cc
 CFLAGS := -Wall -Wextra -Werror
 
 # Library name
-NAME := philo_bonus
+NAME := philo
 
 # Source and object files
 SRC_FILES := main.c run.c philos_logic.c actions.c semaphores.c \

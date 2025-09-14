@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 21:08:22 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/09/11 23:21:30 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/09/14 17:23:32 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	init_semaphores(t_semaphores *sems, int philosopher_count)
 {
 	sem_unlink("/death");
 	sem_unlink("/forks");
-	sems->sem_forks = sem_open("/forks", O_CREAT | O_EXCL, 0644,
-			philosopher_count);
+	
+	sems->sem_forks = sem_open("/forks", O_CREAT | O_EXCL, 0644, philosopher_count);
 	if (sems->sem_forks == SEM_FAILED)
 	{
 		ft_perror("sem_open forks");

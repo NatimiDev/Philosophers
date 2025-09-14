@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 20:22:33 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/09/11 23:31:51 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/09/14 17:26:11 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,14 +101,14 @@ static int	wait_for_philosophers(pid_t *pids, int count)
 	return (0);
 }
 
-static void	terminate_philosophers(pid_t *pids, int count, pid_t exclude)
+static void	terminate_philosophers(pid_t *pids, int count, pid_t died_pid)
 {
 	int	i;
 
 	i = 0;
 	while (i < count)
 	{
-		if (pids[i] != exclude && pids[i] > 0)
+		if (pids[i] != died_pid && pids[i] > 0)
 			kill(pids[i], SIGTERM);
 		i++;
 	}
