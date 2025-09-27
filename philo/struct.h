@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:13:21 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/09/12 14:42:20 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/09/13 21:10:47 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef struct s_philosopher
 	pthread_mutex_t	m_status;
 	long			last_meal_time;
 	pthread_mutex_t	m_meal_time;
-	pthread_mutex_t	first_fork;
-	pthread_mutex_t	second_fork;
+	pthread_mutex_t	*first_fork;
+	pthread_mutex_t	*second_fork;
 	t_philo_config	config;
 	t_shared_config	*shared_config;
 }	t_philosopher;

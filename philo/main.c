@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 13:36:57 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/09/15 19:06:37 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/09/25 17:17:13 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int	main(int argc, char *argv[])
 {
 	t_philo_config	config;
 
-	if (argc < 5)
+	if (argc != 5 && argc != 6)
 	{
-		ft_perror("Invalid input.");
+		ft_perror("Invalid number of arguments.");
 		return (1);
 	}
 	if (!init_config(argc, argv, &config))
 	{
-		ft_perror("Invalid input.");
+		ft_perror("Invalid input. Only positive numbers are allowed.");
 		return (1);
 	}
 	if (config.philosopher_count == 0)
@@ -43,10 +43,10 @@ int	main(int argc, char *argv[])
 
 static bool	init_config(int argc, char *argv[], t_philo_config *config)
 {
-	if (!ft_isnumeric(argv[1]) || !ft_isnumeric(argv[2])
-		|| !ft_isnumeric(argv[3]) || !ft_isnumeric(argv[4])
-		|| (argc > 5 && !ft_isnumeric(argv[5])))
-		return (config);
+	if (!ft_is_natural_number(argv[1]) || !ft_is_natural_number(argv[2])
+		|| !ft_is_natural_number(argv[3]) || !ft_is_natural_number(argv[4])
+		|| (argc > 5 && !ft_is_natural_number(argv[5])))
+		return (NULL);
 	config->philosopher_count = ft_atoi(argv[1]);
 	config->time_to_die = ft_atoi(argv[2]);
 	config->time_to_eat = ft_atoi(argv[3]);

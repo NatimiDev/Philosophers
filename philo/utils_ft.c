@@ -6,11 +6,12 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 16:32:10 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/09/10 22:16:21 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/09/25 20:25:49 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <limits.h>
 
 static bool	ft_isdigit(int c)
 {
@@ -19,15 +20,13 @@ static bool	ft_isdigit(int c)
 	return (false);
 }
 
-bool	ft_isnumeric(char *str)
+bool	ft_is_natural_number(char *str)
 {
 	int	i;
 
 	i = 0;
 	if (!str[i])
 		return (0);
-	if (str[i] == '-' || str[i] == '+')
-		i++;
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
@@ -57,6 +56,8 @@ int	ft_atoi(const char *str)
 	while (*str >= '0' && *str <= '9')
 	{
 		number = number * 10 + (*str - '0');
+		if (number > INT_MAX)
+			return (INT_MAX);
 		str++;
 	}
 	return (sign * number);

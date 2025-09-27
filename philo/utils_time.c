@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 20:37:13 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/09/11 23:37:09 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/09/14 17:01:08 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 long	get_curr_time_in_ms(void)
 {
-	struct timeval	tv;
+	struct timeval	time;
 
-	gettimeofday(&tv, NULL);
-	return ((long)tv.tv_sec * 1000 + tv.tv_usec / 1000);
+	if (gettimeofday(&time, NULL) == -1)
+		ft_perror("ERROR: cannot get current time");
+	return ((long)time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
 long	get_time_since_start(long start_time)

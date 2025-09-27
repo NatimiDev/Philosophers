@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:07:31 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/09/12 14:45:17 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/09/15 19:29:36 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,18 @@ t_philosopher	create_philosopher(int id, pthread_mutex_t *forks,
 							t_shared_config *shared_config)
 {
 	t_philosopher	new_philo;
-	pthread_mutex_t	right_fork;
-	pthread_mutex_t	left_fork;
+	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*left_fork;
 
 	new_philo.id = id;
-	right_fork = forks[id - 1];
-	left_fork = forks[id % config.philosopher_count];
+	right_fork = &forks[id - 1];
+	left_fork = &forks[id % config.philosopher_count];
+	new_philo.first_fork = right_fork;
+	new_philo.second_fork = left_fork;
 	if (id % 2)
 	{
 		new_philo.first_fork = left_fork;
 		new_philo.second_fork = right_fork;
-	}
-	else
-	{
-		new_philo.first_fork = right_fork;
-		new_philo.second_fork = left_fork;
 	}
 	new_philo.meals_eaten = 0;
 	new_philo.is_full = false;
