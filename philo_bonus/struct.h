@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 00:13:21 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/09/14 23:26:26 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/09/27 00:17:50 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_philosopher
 	t_philo_config			config;
 	sem_t					*sem_death;
 	sem_t					*sem_forks;
-	char					sem_meal_time_name[20];
 	sem_t					*sem_meal_time;
 }	t_philosopher;
 
@@ -43,6 +42,7 @@ typedef struct s_semaphores
 {
 	sem_t	*sem_forks;
 	sem_t	*sem_death;
+	sem_t	**sem_meal_time;
 }	t_semaphores;
 
 #endif

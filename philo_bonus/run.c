@@ -6,7 +6,7 @@
 /*   By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 20:22:33 by nmikuka           #+#    #+#             */
-/*   Updated: 2025/09/14 17:26:11 by nmikuka          ###   ########.fr       */
+/*   Updated: 2025/09/26 23:43:54 by nmikuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int	run(t_philo_config config)
 	pids = spawn_philosophers(config, &sems);
 	if (!pids)
 	{
-		cleanup_semaphores(&sems);
+		cleanup_semaphores(&sems, config.philosopher_count);
 		return (1);
 	}
 	wait_for_philosophers(pids, config.philosopher_count);
 	free(pids);
-	cleanup_semaphores(&sems);
+	cleanup_semaphores(&sems, config.philosopher_count);
 	return (0);
 }
 
@@ -57,7 +57,7 @@ static pid_t	*spawn_philosophers(t_philo_config config, t_semaphores *sems)
 		if (pid[i] == 0)
 		{
 			free(pid);
-			create_philosopher(i + 1, config, sems->sem_forks, sems->sem_death);
+			create_philosopher(i, config, sems);
 			exit(0);
 		}
 		i++;

@@ -6,7 +6,7 @@
 #    By: nmikuka <nmikuka@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/19 20:34:46 by nmikuka           #+#    #+#              #
-#    Updated: 2025/09/13 19:58:56 by nmikuka          ###   ########.fr        #
+#    Updated: 2025/09/25 20:36:25 by nmikuka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CC := @cc
 CFLAGS := -Wall -Wextra -Werror
 
 # Library name
-NAME := philo
+NAME := philo_bonus
 
 # Source and object files
 SRC_FILES := main.c run.c philos_logic.c actions.c semaphores.c \
@@ -29,7 +29,89 @@ all: $(NAME)
 
 $(NAME): $(OBJ_FILES)
 	$(CC) $(CFLAGS) $(OBJ_FILES) -o $@  -lpthread
-	@echo "Philosophers are ready to die!"
+	@$(MAKE) print_random_art
+
+print_random_art:
+	@bash -c '\
+		choice=$$((RANDOM % 3)); \
+		if [ $$choice -eq 0 ]; then \
+			$(MAKE) print_spaghetti_bowl; \
+		elif [ $$choice -eq 1 ]; then \
+			$(MAKE) print_brain; \
+		else \
+			$(MAKE) print_death; \
+		fi'
+
+print_spaghetti_bowl:
+	@echo "                ██      ██      ██"
+	@echo "                  ██    ██        ██"
+	@echo "                    ██  ██          ██"
+	@echo "                    ██    ██        ██"
+	@echo "                  ██        ██    ██"
+	@echo "                            ██  ██"
+	@echo "                          ██"
+	@echo ""
+	@echo "        ██████        ████████████"
+	@echo "      ██      ██    ██            ██"
+	@echo "    ██    ████  ████    ████████    ██              ████"
+	@echo "  ██    ██    ████    ██        ██    ██████      ██    ██"
+	@echo "  ██  ██  ██████    ██    ████    ██    ██  ██  ██        ██"
+	@echo "██  ██  ██  ██    ██    ██    ██    ██    ██  ██          ██"
+	@echo "████████████████████████████████████████████████████    ██"
+	@echo "  ██████████████████████████████████████      ████    ██"
+	@echo "  ██████████████████████████████████████      ████  ██"
+	@echo "    ██████████████████████████████████      ████    ██"
+	@echo "      ██████████████████████████████    ██████        ██"
+	@echo "        ██████████████████████████  ████████"
+	@echo "            ████████████████████████████"
+	@echo "\n           Philosophers are ready to eat!"
+	
+
+print_brain:
+	@echo "              ████████     ████████   ████████"
+	@echo "          ████        █████        ███        ████"
+	@echo "      ██████      ████      ████    ██      ██    ████"
+	@echo "      ██  ████    ██            ██          ██  ██  ████"
+	@echo "    ██          ██████        ████   ███████  ██      ██"
+	@echo "    ██        ████  ██████    ██              ██  ██████"
+	@echo "  ██          ██        ██                      ██      ██"
+	@echo "  ██  ██    ████          ██    ██    ██████████        ██"
+	@echo "██    ████  ████      ██        ████████   ██    ████  ████"
+	@echo "██      ██████  ████  ████                       ██      ██"
+	@echo "████      ██            ██              ██       ██    ████"
+	@echo "██        ██        ██████    ████      ██         ██  ██"
+	@echo "██  ██    ██        ██          ████    ████       █████"
+	@echo "██  ████████      ████          ████      ████   ████"
+	@echo "██        ██              ████████          ████████"
+	@echo "████    ██████  ██████        ██  ████████████  ██"
+	@echo "  ████      ██████          ██████          ██    ██"
+	@echo "      ████    ██      ██████                  ██    ██"
+	@echo "        ████████████████                        ██████"
+	@echo "\n           Philosophers are ready to think!"
+
+print_death:
+	@echo "                ████████████████████████"
+	@echo "          ██████                        ████"
+	@echo "        ██                                  ██"
+	@echo "      ██                                    ██"
+	@echo "    ██                                        ██"
+	@echo "  ██                                          ██"
+	@echo "██    ██████            ████████              ██"
+	@echo "██  ██████████        ████████████            ██"
+	@echo "██  ██████████        ████████████            ██"
+	@echo "██  ██████████        ████████████            ██"
+	@echo "██  ██████████        ████████████            ██"
+	@echo "██    ██████            ████████              ██"
+	@echo "██                                            ██"
+	@echo "  ██          ██  ██                        ██  "
+	@echo "  ██          ██  ██                        ██  "
+	@echo "    ██                      ██            ██"
+	@echo "    ██                      ████        ██"
+	@echo "    ██                      ██  ████████"
+	@echo "    ██    ██    ██    ██    ██"
+	@echo "    ██    ██    ██    ██    ██"
+	@echo "      ████  ████  ████  ████"
+	@echo "\n           Philosophers are ready to die!"
 
 $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(OBJ_DIR)
